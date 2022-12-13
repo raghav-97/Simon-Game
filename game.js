@@ -5,9 +5,22 @@ var userClickedPattern = [];
 
 var gameStarted = false;
 var level = 0;
+var score = 0;
 
 // to start the game by pressing any key
+// --> Desktop
 $(document).keypress(function () {
+  if (!gameStarted) {
+    // if game is not started
+
+    $("#level-title").text("Level " + level);
+    nextSequence();
+    gameStarted = true;
+  }
+});
+
+// --> Mobile
+$("#start").click(function () {
   if (!gameStarted) {
     // if game is not started
 
@@ -71,15 +84,21 @@ function animatePress(currentColor) {
 
 function checkAnswer(currentLevel) {
   if (userClickedPattern[currentLevel] === gamePattern[currentLevel]) {
-    console.log("success");
-
     if (userClickedPattern.length === gamePattern.length) {
+      // high score & current score logic
+      score += 1;
+      // TODO
+      // if(score > highscore) {
+      //   highscore = score;
+      //   $("#highscore").text(score);
+      // }
+
+      $("#highscore").text(score);
       setTimeout(() => {
         nextSequence();
       }, 1000);
     }
   } else {
-
     $("body").addClass("game-over");
     setTimeout(() => {
       $("body").removeClass("game-over");
@@ -98,4 +117,5 @@ function startover() {
   level = 0;
   gamePattern = [];
   gameStarted = false;
+  score = 0;
 }
