@@ -56,7 +56,7 @@ body {
 }
 
 /* Mobile screen < 420px*/
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 450px) {
   #level-title {
     font-size: 35px;
   }
